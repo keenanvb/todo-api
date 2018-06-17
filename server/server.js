@@ -12,7 +12,7 @@ let app = express();
 
 app.use(bodyParser.json());
 
-
+// Todo
 app.post('/todos',(req,res)=>{
     let todo = new Todo({
         text: req.body.text
@@ -31,7 +31,7 @@ app.get('/todos',(req,res)=>{
         res.send({
             todos
         })
-    },(err)=>{
+    },(error)=>{
         res.status(400).send(error);
     });
 });
@@ -50,8 +50,8 @@ app.get('/todos/:id',(req,res)=>{
         }
 
         res.send({todo})
-    }).catch((e)=>{
-        res.status(400).send();
+    }).catch((error)=>{
+        res.status(400).send(error);
     });
 });
 
@@ -68,8 +68,8 @@ app.delete('/todos/:id',(req,res)=>{
             return res.status(404).send();
         }
         res.send(todo)
-    }).catch((e)=>{
-        res.status(400).send();
+    }).catch((error)=>{
+        res.status(400).send(error);
     })
 });
 
@@ -97,11 +97,27 @@ app.patch('/todos/:id',(req,res)=>{
 
         res.send({todo});
 
-    }).catch((e)=>{
-        res.status(400).send();
+    }).catch((error)=>{
+        res.status(400).send(error);
     });
 
 });
+
+// User
+app.post('/user',(req,res) => {
+    let body = _.pick(req.body,['email','password']);
+    let user = new User(body);
+
+
+    user.save().then(()=>{
+        return user.generateAuthToken();
+    }).then((token)=>{
+        res.header('x-auth', token).send(user);
+    }).catch((error)=>{
+        console.log(error);
+        res.status(400).send(error);
+    });
+})
 
 app.listen(3000,()=>{
     console.log('listeing on port 3000')

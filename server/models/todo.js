@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //Todo schema
-const todoSchema = new Schema({
+const TodoSchema = new Schema({
     text: {
         type: String,
         required: true,
@@ -20,7 +20,7 @@ const todoSchema = new Schema({
 });
 
 //Todo model
-var Todo = mongoose.model('Todo', todoSchema);
+var Todo = mongoose.model('Todo', TodoSchema);
 
 module.exports = {Todo}
 
