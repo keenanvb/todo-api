@@ -1,4 +1,4 @@
-
+require('./config/config');
 let express = require('express');
 let bodyParser = require('body-parser');
 let { ObjectID} = require('mongodb');
@@ -10,6 +10,7 @@ let {Todo} = require('./models/todo');
 let {authenticate} = require('./middleware/authenticate');
 
 let app = express();
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -126,7 +127,7 @@ app.get('/users/me',authenticate,(req,res)=>{
 });
 
 app.listen(3000,()=>{
-    console.log('listeing on port 3000')
+    console.log(`listeing on port ${port}`)
 });
 
 module.exports = {app}
