@@ -14,6 +14,22 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
+// app.use((req, res, next) => {
+//     let now = new Date().toString();
+//     let log = `Date ${now} ${req.method} ${req.url} \n`;
+//     fs.appendFile('logs.txt', log, (err) => {
+//         if (err) {
+//             console.log('Unable to append to log.txt')
+//         }
+//     });
+//     next();
+// });
+
+//Maintenance
+// app.use((req, res, next) => {
+//     res.render('');
+// })
+
 // Todo
 app.post('/todos',(req,res)=>{
     let todo = new Todo({
