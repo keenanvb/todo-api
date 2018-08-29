@@ -20,6 +20,10 @@ const users = [{
     _id: userTwoId ,
     email:'admin2@example.com',
     password: 'userTwoPassword',
+    tokens:[{
+       access:'auth',
+       token: jwt.sign({_id: userTwoId ,access:'auth'},'this is the secret').toString()
+    }]
 }];
 
 const todos = [{
